@@ -4,7 +4,9 @@
   "description": "Curso iTtalents Módulo Backend - Trabalho final sobre estrutura de Backend de uma Pizzaria",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
