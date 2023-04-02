@@ -31,8 +31,8 @@ const findAllUsersController = async (req, res) => {
 
 const createUserController = async (req, res) => {
     try{
-        // const body = req.body;
-        const bodyValido = UserService.isBodyValidService(req.body);
+        const body = req.body;
+        const bodyValido = UserService.isBodyValidService(body, res);
         
         if (!bodyValido){
             return; //já mostrou msg erro referente ao campo e agora apenas retorna. 
@@ -64,11 +64,14 @@ const removeUserController = async (req, res) => {
     try{
         const deletedUser = await UserService.removeUserService(req.params.id);
 
-        if (deletedUser.deletedCount > 0){
-            return res.status(200).send({message: `Usuário deletado com sucesso`});
-        }else{
-            return res.status(404).send({message: `Usuário não encontrado!`});
-        }
+        console.log(deletedUser);
+        return res.status(200).send({message: `Usuário deletado com sucesso`});
+        
+        // if (deletedUser.deletedCount > 0){
+        //     return res.status(200).send({message: `Usuário deletado com sucesso`});
+        // }else{
+        //     return res.status(404).send({message: `Usuário não encontrado!`});
+        // }
 
     }catch(err){
         console.log(`Erro: ${err.message}`);        
