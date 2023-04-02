@@ -38,15 +38,9 @@ const removeUserFavProductService = (produto) => {
 };
 
 //valida sequencialmente todos os campos do Body até que nenhum seja inválido, retornando true
-const isBodyValidService = (body) => {
+const isBodyValidService = (body, res) => {
 
-    // nome
-    // email
-    // senha
-    // imagem
-    // admin
-    // createdAt
-    // enderecos: logradouro, numero, complemento, cep, createdAt
+    // falta validar os endereços e funçao "now" para createAt
 
     if( Object.keys(body).length === 0 ){
         return res.status(400).send({message:"Corpo da mensagem vazio!"});
@@ -78,15 +72,6 @@ const isBodyValidService = (body) => {
     }
 
     // Campo createdAt --> preencher automaticamente com funçao semelhante now()
-
-    // VERIFICAR SE PRECISA DE MAP... NAS AULAS.
-    // validar enderecos: logradouro, numero, complemento, cep, createdAt 
-    // if (body.enderecos.......){
-    //     if( (body.enderecos != "true") && (body.enderecos !=" false") ){
-    //         res.status(400).send({message: `Campo Endereço precisa ser preenchido!`});
-    //         return false;
-    //     }
-    // }
 
     //todos os campos foram validados
     return true;
