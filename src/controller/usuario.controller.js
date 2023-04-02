@@ -78,6 +78,20 @@ const removeUserController = async (req, res) => {
 
 const addUserAddressController = async (req, res) => {
     try{
+        //verifica se o usuario informado existe
+        const user = await UserService.findUserByIdService(req.params.id);
+        if (!user){
+            return res.status(404).send({message: `Usuario não encontrado!`});
+        }
+
+        req.body.createdAt = new Date();
+        const endereco = await UserService.addUserAddressService(req.params.id, req.body);
+
+        if (endereco.ok == 1){
+            return res.status(201).send({message: `Endereço adicionado com sucesso`});
+        }else{
+            return res.status(400).send({message: `Algo deu errado na adição do Endereço!`});
+        }
 
     }catch(err){
         console.log(`Erro: ${err.message}`);        
@@ -87,6 +101,19 @@ const addUserAddressController = async (req, res) => {
 
 const removeUserAddressController = async (req, res) => {
     try{
+        //verifica se o usuario informdo existe
+        const user = await UserService.findUserByIdService(req.params.id);
+        if (!user){
+            return res.status(404).send({message: `Usuario não encontrado!`});
+        }
+
+        const endereco = await UserService.removeUserAddressService(req.body.id, req.body.addressId);
+
+        if (endereco.ok == 1){
+            return res.status(200).send({message: `Endereço removido com sucesso`});
+        }else{
+            return res.status(400).send({message: `Algo deu errado. Não foi possível remover endereço!`});
+        }
 
     }catch(err){
         console.log(`Erro: ${err.message}`);        
