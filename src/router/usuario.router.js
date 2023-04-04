@@ -6,7 +6,7 @@ const router =  express.Router();
 const authMiddleware = require("../middleware/auth.middleware");
 
 //rotas GET
-router.get('/findById/:id', authMiddleware, usuarioController.findUserByIdController);
+router.get('/find/:id', authMiddleware, usuarioController.findUserByIdController);
 router.get('/findAll', authMiddleware, usuarioController.findAllUsersController);
 
 //rotas POST

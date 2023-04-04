@@ -20,7 +20,7 @@ const findUserByIdController = async (req, res) => {
 
 const findAllUsersController = async (req, res) => {
     try{
-        //fazer tratativa pra saber se não retornou vazio
+
         return res.status(200).send( await UserService.findAllUsersService() );
 
     }catch(err){
