@@ -20,6 +20,7 @@ const deleteCategoriaService = (id) => {
     return Categoria.findOneAndRemove(id);
 };
 
+
 module.exports = {
     findCategoriaByIdService,
     findAllCategoriasService,

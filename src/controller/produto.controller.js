@@ -3,6 +3,7 @@ const ProdutoService = require("../service/produto.service");
 const findProductByIdController = async (req, res) => {
     try{
         res.send(await ProdutoService.findProductByIdServices(req.params.id));
+
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -11,6 +12,7 @@ const findProductByIdController = async (req, res) => {
 const findAllProductsController = async (req, res) => {
     try{
         res.send(await ProdutoService.findAllProductsService());
+
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -37,6 +39,7 @@ const createProductController = async (req, res) => {
 const updateProductController = async (req, res) => {
     try{
         res.send(await ProdutoService.updateProductService(req.params.id, req.body));
+
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -46,16 +49,41 @@ const updateProductController = async (req, res) => {
 const deleteProductController = async (req, res) => {
     try{
         res.send(await ProdutoService.deleteProductService(req.params.id));
+
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
     }
 }
 
+const addCategoriaProdutoController = async (req, res) => {
+    try{
+        req.body.createAt = new Date();
+        const categoria = await ProdutoService.addCategoriaProdutoService(req.params.id, req.body);
+
+    }catch(err){
+        console.log(`Erro: ${err.message}`);        
+        return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
+    }
+}
+
+const removeCategoriaProdutoController = async (req, res) => {
+    try{
+        const categoria = await ProdutoService.removeCategoriaProdutoService(req.body);
+
+    }catch(err){
+        console.log(`Erro: ${err.message}`);        
+        return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
+    }
+}
+
+
 module.exports = {
     findProductByIdController,
     findAllProductsController,
     createProductController,
     updateProductController,
-    deleteProductController
+    deleteProductController,
+    addCategoriaProdutoController,
+    removeCategoriaProdutoController
 }
