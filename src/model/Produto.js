@@ -12,6 +12,7 @@ const ProdutoSchema = new mongoose.Schema({
     //         createdAt: {type: Date, required: true, default: Date.now()}
     //     },
     // ],
+    createdAt: {type: Date, required: true, default: Date.now()}
 });
 
 const Produto = mongoose.model("produto", ProdutoSchema);
