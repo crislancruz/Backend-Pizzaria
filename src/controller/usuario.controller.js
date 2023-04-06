@@ -1,4 +1,5 @@
 
+const Usuario = require("../model/Usuario");
 const UserService = require("../service/usuario.service");
 
 const findUserByIdController = async (req, res) => {
@@ -117,7 +118,7 @@ const removeUserAddressController = async (req, res) => {
 
 const addUserFavProductController = async (req, res) => {
     try{
-
+        return res.status(201).send(await UserService.addUserFavProductService(req.params.id, req.body));
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -126,7 +127,7 @@ const addUserFavProductController = async (req, res) => {
 
 const removeUserFavProductController = async (req, res) => {
     try{
-
+        return res.status(200).send(await UserService.removeUserFavProductService(req.params.id, req.body));
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});

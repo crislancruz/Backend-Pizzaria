@@ -58,12 +58,41 @@ const removeUserAddressService = (id, addressId) => {
 };
 
 const addUserFavProductService = (id, produto) => {
-
+    return Usuario.findOneAndUpdate(
+        {
+            _id: id,
+        },
+        {
+            $push: {
+                produtos_fav: {
+                    _id: produto._id,
+                }
+            }
+        },
+        {
+            rawResult: true,
+        }
+    );
 };
 
-const removeUserFavProductService = (produto) => {
-
+const removeUserFavProductService = (id, produto) => {
+    return Usuario.findOneAndUpdate(
+        {
+            _id: id,
+        },
+        {
+            $pull: {
+                produtos_fav: {
+                    _id: produto._id,
+                }
+            }
+        },
+        {
+            rawResult: true,
+        }
+    );
 };
+
 
 //valida sequencialmente todos os campos do Body até que nenhum seja inválido, retornando true
 const isBodyValidService = (body, res) => {
