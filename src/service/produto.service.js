@@ -22,13 +22,12 @@ const deleteProductService = (id) => {
 const addCategoriaProdutoService = (id, categoria) => {
     return Produto.findOneAndUpdate(
         {
-            _id : id
+            _id: id
         },
         {
             $push: {
-                categoria: {
-                    _id: categoria._id,
-                    createdAt: categoria.createdAt
+                categorias: {
+                    _id: categoria._id
                 },
             },
         },
@@ -41,11 +40,11 @@ const addCategoriaProdutoService = (id, categoria) => {
 const removeCategoriaProdutoService = (id, categoria) => {
     return Produto.findOneAndUpdate(
         {
-            _id : id
+            _id: id
         },
         {
             $pull: {
-                categoria: {
+                categorias: {
                     _id : categoria._id,
                 }
             }
