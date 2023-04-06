@@ -7,10 +7,10 @@ const CarrinhoSchema = new mongoose.Schema({
             quantidade: {type: Number, required: true}
         }
     ],
-    createdAt: {type: Date, required: true, default: Date.now()},
     precoTotal: {type: Number, required: true},
     frete: {type: Number, required: true},
-    userID: {type: mongoose.Schema.Types.ObjectId, ref:"usuarios"}
+    userID: {type: mongoose.Schema.Types.ObjectId, ref:"usuarios"},
+    createdAt: {type: Date, required: true, default: Date.now()}    
 });
 
 const Carrinho = mongoose.model("carrinho", CarrinhoSchema);
