@@ -1,7 +1,6 @@
-const usuarioController = require("../controller/usuario.controller");
-
 const router =  require("express").Router();
 
+const usuarioController = require("../controller/usuario.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 
 //rotas GET

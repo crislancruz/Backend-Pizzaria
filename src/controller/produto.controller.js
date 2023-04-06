@@ -21,11 +21,9 @@ const findAllProductsController = async (req, res) => {
 
 const createProductController = async (req, res) => {
     try{
-        // Com spready (...) Pega toda inf q o usuario passou, adiciona login e datahora da criação.
         const corpo = {  
             ...req.body,  
-            userId: req.userId,
-            createAt: new Date(),
+            userId: req.userId
         }
 
         res.send(await ProdutoService.createProductService(corpo));
@@ -58,7 +56,6 @@ const deleteProductController = async (req, res) => {
 
 const addCategoriaProdutoController = async (req, res) => {
     try{
-        req.body.createAt = new Date();
         const categoria = await ProdutoService.addCategoriaProdutoService(req.params.id, req.body);
         res.status(200).send(categoria);
 

@@ -20,12 +20,7 @@ const findAllCategoriasController = async (req, res) => {
 
 const createCategoriaController = async (req, res) => {
     try{
-        // Com spready (...) Pega toda inf q o usuario passou, adiciona login e datahora da criação.
-        const corpo = {  
-            ...req.body,  
-            createAt: new Date(),
-        }
-        res.status(201).send(await CategoriaService.createCategoriaService(corpo));
+        res.status(201).send(await CategoriaService.createCategoriaService(req.body));
     
     }catch(err){
         console.log(`Erro: ${err.message}`);        
