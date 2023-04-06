@@ -9,7 +9,7 @@ const findAllCarrinhosService = () => {
 }
 
 // verificar se precisa do ID, q tá sendo passado no Controller
-const createCarrinhoService = (id, body) => {
+const createCarrinhoService = (body) => {
     return Carrinho.create(body);
 }
 
