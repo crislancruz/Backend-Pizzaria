@@ -14,11 +14,14 @@ const validaUsuario = (req, res, next) => {
     if (!req.body.imagem){
         return res.status(400).send({message: `Campo Imagem precisa ser preenchido!`});
     }
-    if (req.body.admin){ //se tiver alg coisa, testa se é true|false.
+    
+    //se tiver vazio, assume valor default false no model.
+    if (req.body.admin.length >0 ){  //se não tiver vazio, testa se é true|false.
         if( (req.body.admin != "true") && (req.body.admin != "false") ){
-            return res.status(400).send({message: `Campo Admin deve ser 'true' ou 'false'!`});
+            return res.status(400).send({message: `Campo Admin deve ser somente 'true' ou 'false'!`});
         }
-    }        
+    }
+
     return next();
 }
 
@@ -91,8 +94,14 @@ const validaPedido = (req, res, next) => {
     if (!req.body.frete){
         erros.push("frete"); 
     }
-    if (!req.body.concluido){
-        erros.push("concluido"); 
+
+    if (req.body.concluido == undefined){  //se tiver vazio
+        erros.push("concluido");
+    }else{
+        //se tiver algo, tem que ser somente ou true ou false.
+        if( (req.body.concluido != "true") && (req.body.concluido != "false") ){
+            erros.push("concluido"); 
+        }
     }
     
     // testando a quantidade de erros e tomando decisão conforme quantidade retornada.
