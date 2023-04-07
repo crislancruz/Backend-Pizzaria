@@ -1,3 +1,4 @@
+const ObjectId = require("mongoose").Types.ObjectId;
 
 const validaUsuario = (req, res, next) => {
 
@@ -14,14 +15,13 @@ const validaUsuario = (req, res, next) => {
     if (!req.body.imagem){
         return res.status(400).send({message: `Campo Imagem precisa ser preenchido!`});
     }
-    
+
     //se tiver vazio, assume valor default false no model.
     if (req.body.admin.length >0 ){  //se não tiver vazio, testa se é true|false.
         if( (req.body.admin != "true") && (req.body.admin != "false") ){
             return res.status(400).send({message: `Campo Admin deve ser somente 'true' ou 'false'!`});
         }
     }
-
     return next();
 }
 
@@ -57,11 +57,13 @@ const validaProduto = (req, res, next) => {
     }
 }
 
+
 const validaCategoria = (req, res, next) => {
     if (!req.body.nome){
         return res.status(400).send({message: `Campo Nome precisa ser preenchido!`});
     }
 }
+
 
 const validaCarrinho = (req, res, next) => {
     let erros = [];  //var para acumular os erros
@@ -84,6 +86,7 @@ const validaCarrinho = (req, res, next) => {
         }
     }
 }
+
 
 const validaPedido = (req, res, next) => {
     let erros = [];  //var para acumular os erros
@@ -117,10 +120,20 @@ const validaPedido = (req, res, next) => {
 }
 
 
+const validaId = (req, res, next) => {
+    if (ObjectId.isValid(req.params.id)){
+        return next();
+    }else{
+        return res.status(400).send({message: `ID informado não corresponde ao padrão esperado!`});
+    }
+}
+
+
 module.exports = {
     validaUsuario,
     validaProduto,
     validaCategoria,
     validaCarrinho,
-    validaPedido
+    validaPedido,
+    validaId
 }
