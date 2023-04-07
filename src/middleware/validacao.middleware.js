@@ -128,6 +128,28 @@ const validaId = (req, res, next) => {
     }
 }
 
+const validaLogin = (req, res, next) => {
+    let erros = [];  //var para acumular os erros
+
+    if (!req.body.email){
+        erros.push("email"); 
+    }
+    if (!req.body.senha){
+        erros.push("senha"); 
+    }
+    
+    // testando a quantidade de erros e tomando decisão conforme quantidade retornada.
+    if(erros.length == 0){
+        return next();
+    }else{
+        if(erros.length == 1){
+            return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`});
+        }else{
+            return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`});
+        }
+    }
+}
+
 
 module.exports = {
     validaUsuario,
@@ -135,5 +157,6 @@ module.exports = {
     validaCategoria,
     validaCarrinho,
     validaPedido,
-    validaId
+    validaId,
+    validaLogin
 }
