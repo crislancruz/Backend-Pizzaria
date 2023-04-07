@@ -1,5 +1,4 @@
 
-const Usuario = require("../model/Usuario");
 const UserService = require("../service/usuario.service");
 
 const findUserByIdController = async (req, res) => {
@@ -32,14 +31,7 @@ const findAllUsersController = async (req, res) => {
 
 const createUserController = async (req, res) => {
     try{
-        const body = req.body;
-        const bodyValido = UserService.isBodyValidService(body, res);
-        
-        if (!bodyValido){
-            return; //já mostrou msg erro referente ao campo e agora apenas retorna. 
-        }
-        return res.status(201).send( await UserService.createUserService(body) );
-
+        return res.status(201).send( await UserService.createUserService(req.body) );
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -48,13 +40,7 @@ const createUserController = async (req, res) => {
 
 const updateUserController = async (req, res) => {
     try{
-        const bodyValido = UserService.isBodyValidService(req.body);
-
-        if (!bodyValido){
-            return; //já mostrou msg erro referente ao campo e agora apenas retorna. 
-        }
-        return res.send( await UserService.updateUserService(req.params.id, req.body) );
-
+         return res.send( await UserService.updateUserService(req.params.id, req.body) );
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
