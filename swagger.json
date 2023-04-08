@@ -1,0 +1,52 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "API de Pizzaria com diversos CRUDs",
+		"description": "API - Pizzaria Cantinho dos Dev's",
+		"contact": {
+			"name": "Crislan Cruz",
+			"email": "crislancruz@hotmail.com"
+		},
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000/",
+			"description": "API de Teste LOCAL"
+		},
+		{
+			"url": "https://aws222.amazon.com.br/cl01232ws/pizzaria",
+			"description": "API de Produção CLOUD"
+		}
+	],
+    "paths": {
+        "/usuario/findAll": {
+            "get": {
+                "summary":"Lista todos os usuários da API",
+                "description":"Rota responsável por listar todos os usuários cadastrados na API",
+                "tags": ["Usuario"]
+            }
+        },
+        "/usuario/find": {
+            "get": {
+                "summary":"Lista o usuário que corresponde com o Id informado",
+                "description":"Rota responsável por localizar um usuário através do Id informado",
+                "tags": ["Usuario"],
+                "responses": {
+                    "200": {
+                        "description": "OK tarefa realizada com sucesso!"
+                    },
+                    "401": {
+                        "description": "Unauthorized - Erro de autenticação. Problemas com o Token"
+                    },
+                    "404": {
+                        "description": "Not found - Nenhum usuário encontrado"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - Alguma coisa deu errado no Servidor."
+                    }
+                }
+            }
+        }        
+    }
+}
