@@ -12,7 +12,7 @@ const findCarrinhoByIdController = async (req, res) => {
 
 const findAllCarrinhosController = async (req, res) => {
     try{
-        return res.status(200).send(await carrinhoService.findAllCarrinhosService());
+        return res.status(200).send(await carrinhoService.findAllCarrinhosService(req.query.limit, req.query.offset));
 
     }catch(err){
         console.log(`Erro: ${err.message}`);        

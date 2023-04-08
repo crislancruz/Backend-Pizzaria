@@ -9,10 +9,10 @@ const ProdutoSchema = new mongoose.Schema({
     categorias: [
         {
             _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref:"categorias"},
-            createdAt: {type: Date, required: true, default: Date.now()}
+            createdAt: {type: Date, required: true, default: Date.now() - 4*60*60*1000 }
         },
     ],
-    createdAt: {type: Date, required: true, default: Date.now()}
+    createdAt: {type: Date, required: true, default: Date.now() - 4*60*60*1000 }
 });
 
 const Produto = mongoose.model("produto", ProdutoSchema);

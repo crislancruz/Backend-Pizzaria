@@ -11,7 +11,7 @@ const findCategoriaByIdController = async (req, res) => {
 
 const findAllCategoriasController = async (req, res) => {
     try{
-        res.status(200).send(await CategoriaService.findAllCategoriasService());
+        res.status(200).send(await CategoriaService.findAllCategoriasService(req.query.limit, req.query.offset));
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
