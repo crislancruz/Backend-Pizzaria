@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Backend-Pizzaria",
-    "dateExported": "2023-04-06T21:11:44.790Z",
+    "dateExported": "2023-04-08T18:53:05.757Z",
     "version": "1.1",
     "folders": [
         {
@@ -57,7 +57,7 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-04-02T22:42:37.175Z",
-            "modified": "2023-04-04T21:50:10.306Z",
+            "modified": "2023-04-07T03:54:21.183Z",
             "headers": [],
             "params": [],
             "body": {
@@ -98,7 +98,7 @@
             "method": "GET",
             "sortNum": 40000,
             "created": "2023-04-02T14:54:53.675Z",
-            "modified": "2023-04-04T22:03:18.726Z",
+            "modified": "2023-04-08T02:10:10.772Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -116,13 +116,17 @@
             "method": "POST",
             "sortNum": 90000,
             "created": "2023-04-02T15:04:44.845Z",
-            "modified": "2023-04-04T21:41:10.884Z",
+            "modified": "2023-04-08T02:56:08.831Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nome\": \"Steve Jobs\",\n  \"email\": \"stevejobs@apple.com\",\n  \"senha\": \"jobs123\",\n  \"imagem\": \"pathToImage\"\n}",
+                "raw": "{\n  \"nome\": \"Larry Page 12\",\n  \"email\": \"larrypage12@google.com\",\n  \"senha\": \"page123\",\n  \"imagem\": \"pathToImageDoBill\"\n}",
                 "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{Token}}"
             },
             "tests": []
         },
@@ -164,17 +168,21 @@
             "colId": "711bbcc6-9f56-4f6b-bf50-59f816b434e4",
             "containerId": "6e91684c-8b8d-49f9-adf0-6a3cbe25f385",
             "name": "add Address",
-            "url": "{{BaseURL}}{{Port}}/usuario/addAddress/6429bd407001d7e7fb947088",
+            "url": "{{BaseURL}}{{Port}}/usuario/addAddress/642a077731bdcf2c9f085797",
             "method": "POST",
             "sortNum": 102500,
             "created": "2023-04-02T16:45:47.754Z",
-            "modified": "2023-04-06T18:30:32.170Z",
+            "modified": "2023-04-08T03:58:01.264Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"rua\": \"Beco que desaparece\",\n  \"numero\": 888,\n  \"cep\": \"2222222-000\"\n}",
+                "raw": "{\n  \"logradouro\": \"Beco que desaparece\",\n  \"numero\": \"888\",\n  \"cep\": \"2222222-000\"\n}",
                 "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{Token}}"
             },
             "tests": []
         },
@@ -206,13 +214,17 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-04-06T18:27:08.103Z",
-            "modified": "2023-04-06T18:35:20.107Z",
+            "modified": "2023-04-08T17:14:52.922Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"_id\": \"642e557a9c38b4dda1b68613\"\n}",
+                "raw": "{\n  \"_id\": \"6430c0a8934868de74fa319\"\n}",
                 "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{Token}}"
             },
             "tests": []
         },
@@ -221,13 +233,24 @@
             "colId": "711bbcc6-9f56-4f6b-bf50-59f816b434e4",
             "containerId": "71b601ec-b3fd-4d7c-8cbd-57f78ab515b3",
             "name": "FindAll",
-            "url": "{{BaseURL}}{{Port}}/produto/findAll",
+            "url": "{{BaseURL}}{{Port}}/produto/findAll?limit=10&offset=0",
             "method": "GET",
             "sortNum": 130000,
             "created": "2023-04-04T21:38:56.634Z",
-            "modified": "2023-04-06T00:46:29.741Z",
+            "modified": "2023-04-08T01:28:46.974Z",
             "headers": [],
-            "params": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "10",
+                    "isPath": false
+                },
+                {
+                    "name": "offset",
+                    "value": "0",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{Token}}"
@@ -312,11 +335,11 @@
             "colId": "711bbcc6-9f56-4f6b-bf50-59f816b434e4",
             "containerId": "71b601ec-b3fd-4d7c-8cbd-57f78ab515b3",
             "name": "FindById",
-            "url": "{{BaseURL}}{{Port}}/produto/find/642e47504027c4a3294ab954",
+            "url": "{{BaseURL}}{{Port}}/produto/find/6430c0a8934868de74fa3196",
             "method": "GET",
             "sortNum": 150000,
             "created": "2023-04-04T21:54:48.389Z",
-            "modified": "2023-04-06T04:37:38.500Z",
+            "modified": "2023-04-08T17:12:05.258Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -388,12 +411,12 @@
             "method": "POST",
             "sortNum": 160000,
             "created": "2023-04-04T22:06:24.873Z",
-            "modified": "2023-04-06T16:41:59.866Z",
+            "modified": "2023-04-08T02:20:36.654Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"nome\": \"Pizza de Margueria\",\n    \"descricao\": \"queijo, milho, azeitona, manjericao, tomate\",\n    \"precoUnitario\": 50,\n    \"imagem\": \"pathToImage\",\n    \"codigoBarra\": \"555555555\",\n    \"categorias\": [\n      {\n        \"_id\": \"642cd9da025cfb2a7f503a82\"\n      }\n    ]\n}",
+                "raw": "{\n    \"nome\": \"Pizza doce de Cupuaçu\",\n    \"descricao\": \"cupuaçu, chocolate, morango, queijo, milho, manjericao, tomate\",\n    \"precoUnitario\": 50,\n    \"imagem\": \"pathToImage\",\n    \"codigoBarra\": \"0000011111\",\n    \"categorias\": [\n      {\n        \"_id\": \"642cd9da025cfb2a7f503a82\"\n      }\n    ]\n}",
                 "form": []
             },
             "auth": {
@@ -434,7 +457,7 @@
             "method": "POST",
             "sortNum": 160000,
             "created": "2023-04-06T03:11:35.102Z",
-            "modified": "2023-04-06T16:58:25.131Z",
+            "modified": "2023-04-08T18:41:32.290Z",
             "headers": [],
             "params": [],
             "body": {
@@ -480,12 +503,12 @@
             "method": "POST",
             "sortNum": 165000,
             "created": "2023-04-05T23:56:07.214Z",
-            "modified": "2023-04-06T13:54:33.486Z",
+            "modified": "2023-04-08T17:18:47.839Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"_id\": \"642cd9da025cfb2a7f503a83\"\n}",
+                "raw": "{\n    \"_id\": \"642e3a9496cc5dffe1ec9a87\"\n}",
                 "form": []
             },
             "auth": {
