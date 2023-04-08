@@ -10,7 +10,7 @@ const UsuarioSchema = new mongoose.Schema({
         {
             logradouro: {type: String, required: true},
             numero: {type: Number, required: true},
-            complemento: {type: String, required: false},
+            complemento: {type: String},
             cep: {type: String, required: true},
             createdAt: {type: Date, required: true, default: Date.now()}
         }

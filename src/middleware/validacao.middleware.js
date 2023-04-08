@@ -16,13 +16,43 @@ const validaUsuario = (req, res, next) => {
         return res.status(400).send({message: `Campo Imagem precisa ser preenchido!`});
     }
 
-    //se tiver vazio, assume valor default false no model.
-    if (req.body.admin.length >0 ){  //se não tiver vazio, testa se é true|false.
+    
+    if (req.body.admin != undefined){ 
+        //testa se é true|false. Evita bug que se informado   "admin": ""   deixaria passar, derrubando aplicação.
         if( (req.body.admin != "true") && (req.body.admin != "false") ){
             return res.status(400).send({message: `Campo Admin deve ser somente 'true' ou 'false'!`});
         }
     }
+
     return next();
+}
+
+const validaEndereco = (req, res, next) => {
+    let erros = [];  //var para acumular os erros
+
+    //Conversão de Obj pra Array, pra chamar map() s/ erros.
+    Array(req.body).map((value, key) => {
+        if (!value.logradouro){
+            erros.push(`'${key+1} - logradouro'`); 
+        }
+        if (!value.numero){
+            erros.push(`'${key+1} - numero'`); 
+        }
+        if (!value.cep){
+            erros.push(`'${key+1} - cep'`); 
+        }
+    });
+
+    // testando a quantidade de erros e tomando decisão conforme quantidade retornada.
+    if(erros.length == 0){
+        return next();
+    }else{
+        if(erros.length == 1){
+            return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`});
+        }else{
+            return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`});
+        }
+    }
 }
 
 
@@ -120,13 +150,23 @@ const validaPedido = (req, res, next) => {
 }
 
 
-const validaId = (req, res, next) => {
+const validaIdParams = (req, res, next) => {
     if (ObjectId.isValid(req.params.id)){
         return next();
     }else{
         return res.status(400).send({message: `ID informado não corresponde ao padrão esperado!`});
     }
 }
+
+
+const valida_IdBody = (req, res, next) => {
+    if (ObjectId.isValid(req.body._id)){
+        return next();
+    }else{
+        return res.status(400).send({message: `ID informado não corresponde ao padrão esperado!`});
+    }
+}
+
 
 const validaLogin = (req, res, next) => {
     let erros = [];  //var para acumular os erros
@@ -151,12 +191,44 @@ const validaLogin = (req, res, next) => {
 }
 
 
+const validaProdutosCarrinhoPedido = (req, res, next) => {
+    let erros = [];  //var para acumular os erros
+
+    //Conversão de Obj pra Array; dava erro ao chamar função map().
+    req.body.produtos.map((value, key) => {
+        if (!value._id){
+            erros.push(`'${key+1} - _id'`); 
+        }
+        if (!ObjectId.isValid(value._id)){
+            erros.push(`'${key+1} - _id - Tipo inválido!'`); 
+        }
+        if (!value.quantidade){
+            erros.push(`'${key+1} - quantidade'`); 
+        }
+    });
+
+    // testando a quantidade de erros e tomando decisão conforme quantidade retornada.
+    if(erros.length == 0){
+        return next();
+    }else{
+        if(erros.length == 1){
+            return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`});
+        }else{
+            return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`});
+        }
+    }
+}
+
+
 module.exports = {
     validaUsuario,
+    validaEndereco,
     validaProduto,
     validaCategoria,
     validaCarrinho,
     validaPedido,
-    validaId,
-    validaLogin
+    validaIdParams,
+    valida_IdBody,
+    validaLogin,
+    validaProdutosCarrinhoPedido
 }

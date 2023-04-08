@@ -31,7 +31,7 @@ const findAllUsersController = async (req, res) => {
 
 const createUserController = async (req, res) => {
     try{
-        return res.status(201).send( await UserService.createUserService(req.body) );
+        return res.status(201).send(await UserService.createUserService(req.body));
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
