@@ -101,7 +101,7 @@
                 }
             }
         },
-        "/usuario/find/{id}": {
+        "/usuario/findById/{id}": {
             "get": {
                 "security": [
                     {"bearerAuth": []}
@@ -111,9 +111,9 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": "true",
-                        "schema": { "type": "integer" },
+                        "schema": { "type": "string" },
                         "name": "id"
                     }                   
                 ],
@@ -150,16 +150,17 @@
                 "summary":"Cria um usuario novo",
                 "description":"Rota responsável por criar um novo usuário através das informações passadas no Endpoint",
                 "tags": ["Usuario"],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "required": "true",
-                        "schema": {
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
-                    }
-                ],
+                "requestBody": {
+                    "content": { 
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    },
+                    "required": "true"
+                },
                 "responses": {
                     "201": {
                         "description": "Retorna o objeto criado no banco!",
@@ -203,20 +204,22 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": "true",
-                        "schema": { "type": "integer" },
+                        "schema": { "type": "string" },
                         "name": "id"
-                    },                    
-                    {
-                        "in": "body",
-                        "required": "true",
-                        "schema": {
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
-                    }
+                    }                  
                 ],
+                "requestBody": {
+                    "content": { 
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Retorna o objeto atualizado no banco!",
@@ -278,7 +281,7 @@
                 }
             }
         },
-        "/usuario/delete/{id}": {
+        "/usuario/remove/{id}": {
             "delete": {
                 "security": [
                     {"bearerAuth": []}
@@ -288,9 +291,9 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": "true",
-                        "schema": { "type": "integer" },
+                        "schema": { "type": "string" },
                         "name": "id"
                     }                   
                 ],
@@ -322,20 +325,22 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": "true",
-                        "schema": { "type": "integer" },
+                        "schema": { "type": "string" },
                         "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required": "true",
-                        "schema": {
-                            "$ref": "#/components/schemas/UserAddress"
-                        },
-                        "name": "body"
-                    }                 
+                    }                
                 ],
+                "requestBody": {
+                    "content": { 
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/UserAddress"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Retorna um usuario com seu novo endereço!",
@@ -397,7 +402,7 @@
                 }
             }            
         },
-        "/usuario/removeAddress/{id}": {
+        "/usuario/removeAddress/": {
             "delete": {
                 "security": [
                     {"bearerAuth": []}
@@ -405,14 +410,20 @@
                 "summary":"Remove o endereço no usuario",
                 "description":"Rota responsável por remover endereços no usuario informado",
                 "tags": ["Usuario"],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "required": "true",
-                        "schema": { "type": "integer" },
-                        "name": "id"
-                    }                                 
-                ],
+                "requestBody": {
+                    "content": { 
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": { "type": "string" },
+                                    "addressId": { "type": "string" }
+                                }
+                            }
+                        }
+                    },
+                    "required": "true"
+                },
                 "responses": {
                     "200": {
                         "description": "Retorna um usuario com o endereço removido!",
@@ -484,20 +495,22 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": "true",
-                        "schema": { "type": "integer" },
+                        "schema": { "type": "string" },
                         "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required": "true",
-                        "schema": {
-                            "$ref": "#/components/schemas/ProductFav"
-                        },
-                        "name": "body"
-                    }                 
+                    }              
                 ],
+                "requestBody": {
+                    "content": { 
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/ProductFav"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Retorna um usuario com seu novo produto favoritado!",
@@ -569,12 +582,25 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": "true",
-                        "schema": { "type": "integer" },
+                        "schema": { "type": "string" },
                         "name": "id"
                     }                                 
                 ],
+                "requestBody": {
+                    "content": { 
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "_id": { "type": "string" }
+                                }
+                            }
+                        }
+                    },
+                    "required": "true"
+                },
                 "responses": {
                     "200": {
                         "description": "Retorna um usuario com o produto favoritado removido!",
