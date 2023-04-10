@@ -1,6 +1,7 @@
 
 const UserService = require("../service/usuario.service");
 
+
 const findUserByIdController = async (req, res) => {
     try{
         const user = await UserService.findUserByIdService(req.params.id);
@@ -18,6 +19,7 @@ const findUserByIdController = async (req, res) => {
     }
 };
 
+
 const findAllUsersController = async (req, res) => {
     try{
 
@@ -29,14 +31,23 @@ const findAllUsersController = async (req, res) => {
     }
 };
 
+
 const createUserController = async (req, res) => {
     try{
-        return res.status(201).send(await UserService.createUserService(req.body));
+        const user = await UserService.findUserByEmail(req.body.email);
+
+        if (!user){
+            return res.status(201).send(await UserService.createUserService(req.body));
+        }else{
+            //if achar email na base - --> msg já existe cadastro para este email
+            return res.status(400).send({message: `Já existe cadastro para este email!`});
+        }
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
     }
 };
+
 
 const updateUserController = async (req, res) => {
     try{
@@ -46,6 +57,7 @@ const updateUserController = async (req, res) => {
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
     }
 };
+
 
 const removeUserController = async (req, res) => {
     try{
@@ -63,6 +75,7 @@ const removeUserController = async (req, res) => {
     }
 };
 
+
 const addUserAddressController = async (req, res) => {
     try{
         const endereco = await UserService.addUserAddressService(req.params.id, req.body);
@@ -78,6 +91,7 @@ const addUserAddressController = async (req, res) => {
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
     }
 };
+
 
 const removeUserAddressController = async (req, res) => {
     try{
@@ -102,6 +116,7 @@ const removeUserAddressController = async (req, res) => {
     }
 };
 
+
 const addUserFavProductController = async (req, res) => {
     try{
         return res.status(201).send(await UserService.addUserFavProductService(req.params.id, req.body));
@@ -111,6 +126,7 @@ const addUserFavProductController = async (req, res) => {
     }
 };
 
+
 const removeUserFavProductController = async (req, res) => {
     try{
         return res.status(200).send(await UserService.removeUserFavProductService(req.params.id, req.body));
@@ -119,6 +135,7 @@ const removeUserFavProductController = async (req, res) => {
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
     }
 };
+
 
 module.exports = {
     findUserByIdController,

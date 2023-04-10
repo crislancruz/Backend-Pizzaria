@@ -179,6 +179,19 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "Erro na criação do usuário. Cheque os parâmetros esperados e tente novamente (Bad Request)",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": { "type": "string" }
+                                    }    
+                                }
+                            }
+                        }                        
+                    },
                     "401": {
                         "description": "Unauthorized - Erro de autenticação. Problemas com o Token",
                         "content": { 
