@@ -4,19 +4,15 @@ Sistema de Backend completo em MVC com API Rest e toda interface da documentaç�
 
 Recursos usados no projeto:
 
-1. HTML5
-2. CSS3
-3. Javascript
-4. MongoDB
-5. Mongoose
-6. Express
-7. DBCrypt
-8. Json web Token JWT
-9. Swagger
-10. CORS
-11. dotEnv (.env e .env.example)
-12. thunder client (chamadas da API no VSCode)
-13. Padrão MVC (router, middleware, controller, service, model, database)
+1. HTML5/CSS3/Javascript
+2. MongoDB
+3. Mongoose
+4. Express
+5. DBCrypt
+6. Json web Token JWT
+7. Swagger
+8. CORS
+9. Padrão MVC (router, middleware, controller, service, model, database)
 
 ## Instalação
 
