@@ -25,7 +25,7 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Lista todos os usuários da API",
+                "summary":"Lista todos os usuários cadastrados na API",
                 "description":"Rota responsável por listar todos os usuários cadastrados na API",
                 "tags": ["Usuario"],
                 "parameters": [
@@ -101,12 +101,12 @@
                 }
             }
         },
-        "/usuario/findById/{id}": {
+        "/usuario/find/{_id}": {
             "get": {
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Lista o usuário que corresponde com o Id informado",
+                "summary":"Lista o usuário correspondente ao Id informado",
                 "description":"Rota responsável por localizar um usuário através do Id informado",
                 "tags": ["Usuario"],
                 "parameters": [
@@ -114,7 +114,7 @@
                         "in": "path",
                         "required": "true",
                         "schema": { "type": "string" },
-                        "name": "id"
+                        "name": "_id"
                     }                   
                 ],
                 "responses": {
@@ -147,6 +147,9 @@
         },
         "/usuario/create": {
             "post": {
+                "security": [
+                    {"bearerAuth": []}
+                ],
                 "summary":"Cria um usuario novo",
                 "description":"Rota responsável por criar um novo usuário através das informações passadas no Endpoint",
                 "tags": ["Usuario"],
@@ -176,6 +179,19 @@
                             }
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized - Erro de autenticação. Problemas com o Token",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": { "type": "string" }
+                                    }    
+                                }
+                            }
+                        }                        
+                    },
                     "500": {
                         "description": "Internal Server Error - Alguma coisa deu errado no Servidor.",
                         "content": { 
@@ -199,8 +215,8 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Lista o usuário que corresponde com o Id informado",
-                "description":"Rota responsável por localizar um usuário através do Id informado",
+                "summary":"Atualiza as informações do usuário, conforme o Id informado como parâmetro.",
+                "description":"Rota responsável por atualizar as informações de usuário, conforme Id informado",
                 "tags": ["Usuario"],
                 "parameters": [
                     {
@@ -286,8 +302,8 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Lista o usuário que corresponde com o Id informado",
-                "description":"Rota responsável por localizar um usuário através do Id informado",
+                "summary":"Remove o usuário correspondente ao Id informado",
+                "description":"Rota responsável por remover usuário através do Id informado",
                 "tags": ["Usuario"],
                 "parameters": [
                     {
@@ -320,8 +336,8 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Adiciona o endereço no usuario",
-                "description":"Rota responsável por adicionar endereços no usuario informado",
+                "summary":"Adiciona o endereço de entrega no usuario correspondente ao Id informado.",
+                "description":"Rota responsável por adicionar endereços de entrega no usuario informado como parâmetro.",
                 "tags": ["Usuario"],
                 "parameters": [
                     {
@@ -407,8 +423,8 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Remove o endereço no usuario",
-                "description":"Rota responsável por remover endereços no usuario informado",
+                "summary":"Remove um endereço de entrega do usuario conforme parâmetro Id especificado",
+                "description":"Rota responsável por remover endereços de entrega no usuario informado como parâmetro",
                 "tags": ["Usuario"],
                 "requestBody": {
                     "content": { 
@@ -490,8 +506,8 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Adiciona produtos favoritos no usuario",
-                "description":"Rota responsável por adicionar produtos favoritos no usuario informado",
+                "summary":"Adiciona produtos favoritos ao usuario informado como parâmetro",
+                "description":"Rota responsável por adicionar produtos favoritos no usuario informado via parâmetro de Id",
                 "tags": ["Usuario"],
                 "parameters": [
                     {
@@ -577,8 +593,8 @@
                 "security": [
                     {"bearerAuth": []}
                 ],
-                "summary":"Remove o produto favoritado no usuario",
-                "description":"Rota responsável por remover produtos favoritados no usuario informado",
+                "summary":"Remove o produto favoritado no usuario passado como parâmetro.",
+                "description":"Rota responsável por remover produtos favoritados no usuario informado no parâmetro.",
                 "tags": ["Usuario"],
                 "parameters": [
                     {

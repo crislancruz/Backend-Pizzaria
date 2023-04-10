@@ -21,18 +21,65 @@ Recursos usados no projeto:
 3. execute npm i
 4. rode usando npm run dev
 
-## Endpoints
+### URLs de acesso
+
+### Métodos
+
+As Requisições para a API devem seguir os padrões:
+
+
+| Método  | Descrição                                             |
+| ---------- | --------------------------------------------------------- |
+| `GET`    | Retorna informações de um ou mais registros.          |
+| `POST`   | Utilizado para criar um novo registro.                  |
+| `PUT`    | Atualiza dados de um registro ou altera sua situação. |
+| `DELETE` | Remove um registro do sistema.                          |
+
+### Respostas
+
+As respostas às Requisições são baseadas nos seguintes códigos de retorno:
+
+
+| Código | Descrição                                                   |
+| --------- | --------------------------------------------------------------- |
+| `200`   | Requisição executada com sucesso (success).                 |
+| `201`   | Informação cadastrada com sucesso (Created).                |
+| `400`   | Requisição inválida (Bad Request).                         |
+| `401`   | Erro de Autenticação. Problemas com o Token (Unauthorized). |
+| `404`   | Registro pesquisado não encontrado (Not found).              |
+| `500`   | Erro interno no Servidor (Internal Server Error).             |
+
+
+### Autenticação
+
+Para testar a API e gerar o **Token de acesso**, primeiramente crie um ***login*** em **/usuario/create**.
+
+
+### Endpoints
 
 Todos os endpoints da aplicação serão listados abaixo:
 
-### Usuário
+
+### Dados de Usuário [/usuario]
+
+Endpoints de Usuário
 
 
+#### /usuario/create
+
+#### /usuario/findById/\{id\}
+
+#### /usuario/findAll
+
+#### /usuario/create
+
+#### /usuario/update/\{id\}
+
+#### /usuario/delete/\{id\}
+
+.
 
 ### Produto
-
-
-
 
 ### Autor
 
