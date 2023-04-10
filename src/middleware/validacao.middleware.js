@@ -1,31 +1,56 @@
 const ObjectId = require("mongoose").Types.ObjectId;
 
-const validaUsuario = (req, res, next) => {
 
-    //testa um erro por vez e toma apenas uma decisão também por vez
+const validaUsuario = (req, res, next) => {
+    let erros = [];  //var para acumular os erros
+
     if (!req.body.nome){
-        return res.status(400).send({message: `Campo Nome precisa ser preenchido!`});
+        erros.push("nome"); 
     }
     if (!req.body.email){
-        return res.status(400).send({message: `Campo Email precisa ser preenchido!`});
+        erros.push("email"); 
     }
     if (!req.body.senha){
-        return res.status(400).send({message: `Campo Senha precisa ser preenchido!`});
+        erros.push("senha"); 
     }
     if (!req.body.imagem){
-        return res.status(400).send({message: `Campo Imagem precisa ser preenchido!`});
+        erros.push("imagem"); 
     }
-
-    
     if (req.body.admin != undefined){ 
         //testa se é true|false. Evita bug que se informado   "admin": ""   deixaria passar, derrubando aplicação.
         if( (req.body.admin != "true") && (req.body.admin != "false") ){
-            return res.status(400).send({message: `Campo Admin deve ser somente 'true' ou 'false'!`});
+            erros.push("admin");
         }
     }
 
-    return next();
+    //se foi informado endereço, faz a validação do mesmo.
+    if (req.body.enderecos != undefined){ 
+        req.body.enderecos.map((value, key) => {
+            if (!value.logradouro){
+                erros.push(`'${key+1} - logradouro'`); 
+            }
+            if (!value.numero){
+                erros.push(`'${key+1} - numero'`); 
+            }
+            if (!value.cep){
+                erros.push(`'${key+1} - cep'`); 
+            }
+        });
+    }
+    
+    // testando a quantidade de erros e tomando decisão conforme quantidade retornada.
+    if(erros.length == 0){
+        return next();
+    }else{
+        if(erros.length == 1){
+            return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`});
+        }else{
+            return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`});
+        }
+    }
+
 }
+
 
 const validaEndereco = (req, res, next) => {
     let erros = [];  //var para acumular os erros
