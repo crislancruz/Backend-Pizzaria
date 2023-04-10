@@ -51,7 +51,14 @@ const createUserController = async (req, res) => {
 
 const updateUserController = async (req, res) => {
     try{
-         return res.send( await UserService.updateUserService(req.params.id, req.body) );
+        const user = await UserService.findUserByIdService(req.params.id);
+
+        if (!user){
+            return res.status(400).send({message: `Usuario não encontrado na base!`});
+        }else{
+            return res.send( await UserService.updateUserService(req.params.id, req.body) );
+        }
+
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
