@@ -179,7 +179,7 @@ const validaIdParams = (req, res, next) => {
     if (ObjectId.isValid(req.params.id)){
         return next();
     }else{
-        return res.status(400).send({message: `ID informado não corresponde ao padrão esperado!`});
+        return res.status(400).send({message: `ID informado não corresponde ao padrão esperado! (IdParams)`});
     }
 }
 
@@ -188,7 +188,7 @@ const valida_IdBody = (req, res, next) => {
     if (ObjectId.isValid(req.body._id)){
         return next();
     }else{
-        return res.status(400).send({message: `ID informado não corresponde ao padrão esperado!`});
+        return res.status(400).send({message: `ID informado não corresponde ao padrão esperado! (IdBody)`});
     }
 }
 

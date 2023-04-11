@@ -101,7 +101,7 @@
                 }
             }
         },
-        "/usuario/find/{_id}": {
+        "/usuario/find/{id}": {
             "get": {
                 "security": [
                     {"bearerAuth": []}
@@ -114,7 +114,7 @@
                         "in": "path",
                         "required": "true",
                         "schema": { "type": "string" },
-                        "name": "_id"
+                        "name": "id"
                     }                   
                 ],
                 "responses": {
@@ -353,11 +353,11 @@
                                 }
                             }
                         }
-                    }               
+                    }              
                 }
             }
         },
-        "/usuario/addAddres/{id}": {
+        "/usuario/addAddress/{id}": {
             "post": {
                 "security": [
                     {"bearerAuth": []}
@@ -444,7 +444,7 @@
                 }
             }            
         },
-        "/usuario/removeAddress/": {
+        "/usuario/removeAddress/{id}": {
             "delete": {
                 "security": [
                     {"bearerAuth": []}
@@ -452,14 +452,21 @@
                 "summary":"Remove um endereço de entrega do usuario conforme parâmetro Id especificado",
                 "description":"Rota responsável por remover endereços de entrega no usuario informado como parâmetro",
                 "tags": ["Usuario"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": "true",
+                        "schema": { "type": "string" },
+                        "name": "id"
+                    }                
+                ],
                 "requestBody": {
                     "content": { 
                         "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "id": { "type": "string" },
-                                    "addressId": { "type": "string" }
+                                    "_id": { "type": "string" }
                                 }
                             }
                         }

@@ -55,10 +55,14 @@ const updateUserController = async (req, res) => {
 
         if (!user){
             return res.status(400).send({message: `Usuario não encontrado na base!`});
-        }else{
-            return res.send( await UserService.updateUserService(req.params.id, req.body) );
         }
-
+        //testa se update troca também o email
+        if (req.body.email != user.email){
+            return res.status(400).send({message: `Campo email não pode ser alterado!`});
+        }
+        
+        return res.send( await UserService.updateUserService(req.params.id, req.body) );
+        
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -102,19 +106,19 @@ const addUserAddressController = async (req, res) => {
 
 const removeUserAddressController = async (req, res) => {
     try{
-        const endereco = await UserService.removeUserAddressService(req.body.id, req.body.addressId);
+        const endereco = await UserService.removeUserAddressService(req.params.id, req.body._id);
         let found = false;
 
         endereco.value.enderecos.map( (valor, chave) =>{
-            if(valor._id == req.body.addressId){
+            if(valor._id == req.body._id){
                 found = true;
             }
         })
 
-        if (endereco.ok == 1){
+        if (found){
             return res.status(200).send({message: `Endereço removido com sucesso`});
         }else{
-            return res.status(400).send({message: `Algo deu errado. Não foi possível remover endereço!`});
+            return res.status(400).send({message: `Endereço não encontrado. Não foi possível remover!`});
         }
 
     }catch(err){
@@ -126,7 +130,14 @@ const removeUserAddressController = async (req, res) => {
 
 const addUserFavProductController = async (req, res) => {
     try{
-        return res.status(201).send(await UserService.addUserFavProductService(req.params.id, req.body));
+        const produto = await UserService.addUserFavProductService(req.params.id, req.body._id);
+
+        if (produto.value == null){
+            return res.status(400).send({message: `Algo deu errado na adição do Endereço!`});
+        }else{
+            return res.status(201).send({message: `Endereço adicionado com sucesso`});
+        }
+
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});
@@ -136,7 +147,22 @@ const addUserFavProductController = async (req, res) => {
 
 const removeUserFavProductController = async (req, res) => {
     try{
-        return res.status(200).send(await UserService.removeUserFavProductService(req.params.id, req.body));
+
+        const produto = await UserService.removeUserFavProductService(req.params.id, req.body._id);
+        let found = false;
+
+        produto.value.produtos_fav.map( (valor, chave) =>{
+            if(valor._id == req.body._id){
+                found = true;
+            }
+        })
+
+        if (found){
+            return res.status(200).send({message: `Produto removido com sucesso da lista de favoritos`});
+        }else{
+            return res.status(400).send({message: `Produto não encontrado nos favoritos. Não foi possível remover!`});
+        }
+  
     }catch(err){
         console.log(`Erro: ${err.message}`);        
         return res.status(500).send({message: `Erro Inesperado. Tente novamente!`});

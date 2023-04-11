@@ -72,7 +72,7 @@ const removeUserAddressService = (id, addressId) => {
 };
 
 
-const addUserFavProductService = (id, produto) => {
+const addUserFavProductService = (id, productId) => {
     return Usuario.findOneAndUpdate(
         {
             _id: id,
@@ -80,7 +80,7 @@ const addUserFavProductService = (id, produto) => {
         {
             $push: {
                 produtos_fav: {
-                    _id: produto._id,
+                    _id: productId,
                 }
             }
         },
@@ -91,7 +91,7 @@ const addUserFavProductService = (id, produto) => {
 };
 
 
-const removeUserFavProductService = (id, produto) => {
+const removeUserFavProductService = (id, productId) => {
     return Usuario.findOneAndUpdate(
         {
             _id: id,
@@ -99,7 +99,7 @@ const removeUserFavProductService = (id, produto) => {
         {
             $pull: {
                 produtos_fav: {
-                    _id: produto._id,
+                    _id: productId,
                 }
             }
         },
